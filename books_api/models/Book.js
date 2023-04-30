@@ -12,6 +12,13 @@ const reviewSchema = new mongoose.Schema({
     }
 })
 
+reviewSchema.set('toJSON',{
+    transform:(document,returnDocument) => {
+        returnDocument.id = document._id.toString()
+        delete returnDocument._id
+    }
+})
+
  
 // create Schema  --> build strcture to store data
 const bookSchema = new mongoose.Schema({
@@ -28,6 +35,13 @@ const bookSchema = new mongoose.Schema({
     reviews:[reviewSchema] 
 }, {timestamps: true});  // timestamps --> track when the book is added/updated
 
+bookSchema.set('toJSON',{
+    transform:(document,returnDocument) => {
+        returnDocument.id = document._id.toString();
+        delete returnDocument._id
+        delete returnDocument__v
+    }
+})
 // we use model to use database not by Schema
 module.exports = mongoose.model('Book', bookSchema);
 
