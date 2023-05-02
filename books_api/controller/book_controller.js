@@ -24,18 +24,19 @@ const getAllBooks = async (req, res) => {
     }
 
 }
-
+//creating a book
 const createBook = (req, res, next) => {
     Book.create(req.body)
         .then(book => res.status(201).json(book))
         .catch(next);
 }
+//deleting all books
 const deleteBook = (req, res) => {
     Book.deleteMany()
         .then(() => res.status(201).json({ "message": "Deleted all successfully" }))
         .catch(next);
 }
-
+// getting book by id
 const getABook = (req, res, next) => {
     Book.findById(req.params.book_id)
         .then(book => {
@@ -47,7 +48,7 @@ const getABook = (req, res, next) => {
         })
         .catch(next);
 }
-
+// updating a book by id 
 const updateABook =(req, res, next) => {
     Book.findByIdAndUpdate(
         req.params.book_id,  // find this id book
@@ -57,6 +58,7 @@ const updateABook =(req, res, next) => {
         .then(updatedBook => res.status(200).json(updatedBook))
         .catch(next)
 }
+//deleting a book by id
 const deleteABook =(req, res, next) => {
     Book.findByIdAndDelete(
         req.params.book_id
