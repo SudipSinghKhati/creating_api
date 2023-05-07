@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         unique: true
     }
 })
-
+// set method to not to return hashed password
 userSchema.set('toJSON',{
     transform: (document,returnDocument) =>{
         returnDocument.id = document._id.toString(),
