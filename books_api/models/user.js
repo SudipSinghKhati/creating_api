@@ -27,7 +27,7 @@ userSchema.set('toJSON',{
     transform: (document,returnDocument) =>{
         returnDocument.id = document._id.toString(),
         delete returnDocument._id;
-        delete returnDocument.__v
+        delete returnDocument.__v;
         delete returnDocument.password;
     }
 })
