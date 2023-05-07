@@ -30,7 +30,8 @@ router.post('/login', (req, res, next)=>{
             if(!success) return res.status(400).json({error: 'password does not match'})
             const payload = {
                 id: user.id,
-                username: user.username
+                username: user.username,
+                fullname: user.fullname
             }
             jwt.sign(
                 payload,process.env.SECRET,
