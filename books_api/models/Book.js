@@ -9,6 +9,11 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: true,
         miniLength: 10
+    },
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+
     }
 })
 
