@@ -31,7 +31,8 @@ router.post('/login', (req, res, next)=>{
             const payload = {
                 id: user.id,
                 username: user.username,
-                fullname: user.fullname
+                fullname: user.fullname,
+                role: user.role
             }
             jwt.sign(
                 payload,process.env.SECRET,
@@ -45,4 +46,4 @@ router.post('/login', (req, res, next)=>{
     }).catch(next)
 })
 
-module.exports = router
+module.exports = router;

@@ -11,6 +11,7 @@ const book_controller = require('../controller/book_controller')
 //import review controller
 const review_controller = require('../controller/review_controller')
 
+const{verifyAdmin} = require('../middleware/auth')
 // express.Router() --> is used to handle different routes moudalizer
 const router = express.Router();
 
@@ -22,12 +23,12 @@ router.route('/')
 
     // add a book in the books list
 
-    .post(book_controller.createBook)
+    .post(verifyAdmin,book_controller.createBook)
 
     .put((req, res, next) => {
         res.status(405).json({ error: "PUT request is not allowed" });
     })
-    .delete(book_controller.deleteBook);
+    .delete(verifyAdmin,book_controller.deleteBook);
 
 
 // path for /api/books/:book_id
@@ -40,7 +41,7 @@ router.route('/:book_id')
     .put(book_controller.updateABook)
 
     // delete particular book
-    .delete(book_controller.deleteABook)
+    .delete(verifyAdmin,book_controller.deleteABook)
     .post((req, res) => {
         res.status(405).json({ error: "POST method is not allowed here" });
     });

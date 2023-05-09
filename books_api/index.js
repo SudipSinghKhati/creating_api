@@ -34,8 +34,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/' + dbName)
 // to use data come from client and send it to the routes/book_routes.js
 
 app.use('/users', user_routes);
-app.use(verifyUser)
-app.use('/books', books_routes);
+// app.use(verifyUser)
+app.use('/books',verifyUser, books_routes);
 
 //eroor handeling 
 app.use((err, req,res,next)=>{
