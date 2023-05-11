@@ -13,7 +13,8 @@ const createReview = (req, res, next) => {
             if (!book) res.status(404).json({ error: "Book not found" });
 
             const review = {
-                text: req.body.text
+                text: req.body.text,
+                user: req.user.id
             }
 
             book.reviews.push(review);
@@ -67,7 +68,10 @@ const updateReview = (req, res, next) => {
             book.reviews = book.reviews.map(singleReview => {
                 // update the review whose id  matches  , _id is an object so, == is used instead of ===
                 if (singleReview.id == req.params.review_id) {
-                    singleReview.text = req.body.text
+                    if(req.user == req.user.id){
+                        singleReview.text = req.body.text
+                    }
+                    
                 }
                 return singleReview;
             })
@@ -87,7 +91,9 @@ const deleteAReview = (req, res, next) => {
 
             // delete specific review only
             book.reviews = book.reviews.filter(singleReview => {
-                return singleReview.id !== req.params.review_id;
+                    return (singleReview.id !== req.params.review_id &&
+                        singleReview.user !==req.user.id)
+                
             })
             // use save() when you create own algorithm to save without using methods of mongoose
             book.save()
