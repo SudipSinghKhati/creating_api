@@ -19,7 +19,7 @@ const verifyAdmin = (req,res,next) => {
     if(req.user.role !== 'admin') {
         return res.status(403).json({error: ' You are not admin'})
 
-    }else if(req.user.role == 'admin'){
+    }else if(req.user.role === 'admin'){
         next()
     }
 }
