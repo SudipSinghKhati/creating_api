@@ -37,6 +37,9 @@ const bookSchema = new mongoose.Schema({
         default: 'Anonymous'
     },
     //invadaing review schema in book 
+    photo:{
+        type:String,
+    },
     reviews:[reviewSchema] 
 }, {timestamps: true});  // timestamps --> track when the book is added/updated
 

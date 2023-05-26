@@ -7,7 +7,7 @@ const express = require('express');
 const books_routes = require('./routes/book_routes');
 const user_routes = require('./routes/user_routes');
 const {verifyUser} = require('./middleware/auth')
-
+const upload = require('./middleware/upload')
 // import mongoose database
 const mongoose = require('mongoose');
 const dbName = '30-a-books'
@@ -19,6 +19,7 @@ const app = express();
 // get data from client side
 // express.json() --> a middleware --> decode the data come from the browsers and store in req.body
 app.use(express.json());
+app.use(express.static('public'))
 
 // user request
 app.get('/', (req, res) => {
@@ -36,6 +37,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/' + dbName)
 app.use('/users', user_routes);
 // app.use(verifyUser)
 app.use('/books',verifyUser, books_routes);
+app.post('/upload',upload.single('photo'), (req,res,next) =>{
+    res.json(req.file)
+})
 
 //eroor handeling 
 app.use((err, req,res,next)=>{

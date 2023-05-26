@@ -64,7 +64,7 @@ const deleteABook =(req, res, next) => {
         req.params.book_id
     )
         .then((deletedBook) => {
-            if (!deletedBook) res.status(404).json({ "erorr": "No found" });
+            if (!deletedBook) res.status(404).json({ erorr: "No found" });
             res.status(202).end();
         })
         .catch(err => {
